@@ -1,6 +1,9 @@
 import galleryItems from '/JS/gallery-items.js'
 
 const creatImagesListRootRef = document.querySelector('.gallery');
+const largeImage = document.querySelector('.lightbox__image');
+
+
 galleryItems.forEach(element => {
     console.log(element);
     const listImagesRef = document.createElement(`li`); //создает элемент списка li
@@ -19,9 +22,35 @@ galleryItems.forEach(element => {
     imagesRef.classList.add('gallery__image')//добавляет класс
     imagesRef.setAttribute('src', element.preview);//добавляет атрибут
     imagesRef.setAttribute('alt', element.description);//добавляет атрибут
-    imagesRef.setAttribute('data-source', element.original);//добавляет атрибут        
+    imagesRef.setAttribute('data-source', element.original);//добавляет атрибут  
 }    
 )
+
+creatImagesListRootRef.addEventListener('click', onGallaryClick)
+
+function onGallaryClick (event) {
+    event.preventDefault()
+
+    console.log(event.target)
+
+    if (event.target.nodeName !== 'IMG') {
+        return;
+    }
+
+    
+    
+    const imgRef = event.target;
+    const largeImageURL = imgRef.dataset.sourse;
+
+    setLargeImageSRC(largeImageURL)
+    
+}
+
+function setLargeImageSRC (url) {
+    largeImage.src = url
+}
+
+
 /* const refs = {
     creatImagesListRootRef: document.querySelector('.gallery');
     listImagesRef: document.createElement(`li`); //создает элемент списка li
