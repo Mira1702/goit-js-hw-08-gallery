@@ -1,16 +1,21 @@
 import galleryItems from './gallery-items.js'
 
-const creatImagesListRootRef = document.querySelector('.gallery');
-const largeImage = document.querySelector('.lightbox__image');
+const refs = {
+    creatImagesListRootRef: document.querySelector('.gallery'),
+    largeImage: document.querySelector('.lightbox__image')
+}
+
+/* const creatImagesListRootRef = document.querySelector('.gallery');
+const largeImage = document.querySelector('.lightbox__image'); */
 
 
 galleryItems.forEach(element => {
-    console.log(element);
+    /* console.log(element); */
     const listImagesRef = document.createElement(`li`); //создает элемент списка li
     const linkImagesRef = document.createElement(`a`); //создает элемент a
     const imagesRef = document.createElement(`img`); //создает элемент списка img
     imagesRef.insertAdjacentHTML('afterbegin', element);//добавляет элемент в начало списка
-    creatImagesListRootRef.append(listImagesRef);//вставляет узел с элементами li в ul после ('#gallery')
+    refs.creatImagesListRootRef.append(listImagesRef);//вставляет узел с элементами li в ul после ('#gallery')
 
     listImagesRef.classList.add('gallery__item');//добавляет класс
     
@@ -23,32 +28,34 @@ galleryItems.forEach(element => {
     imagesRef.setAttribute('src', element.preview);//добавляет атрибут
     imagesRef.setAttribute('alt', element.description);//добавляет атрибут
     imagesRef.setAttribute('data-source', element.original);//добавляет атрибут  
+
+    
 }    
 )
-
-creatImagesListRootRef.addEventListener('click', onGallaryClick)
 
 function onGallaryClick (event) {
     event.preventDefault()
 
-    console.log(event.target)
+    /* console.log(event.target) */
 
     if (event.target.nodeName !== 'IMG') {
         return;
     }
-
+    /* console.log('в картинку') */
     
-    
-    const imgRef = event.target;
-    const largeImageURL = imgRef.dataset.sourse;
+    const imgRef = event.target;   
+    const largeImageURL = imgRef.dataset.source;
+    console.log(largeImageURL)
 
-    setLargeImageSRC(largeImageURL)
+    refs.largeImage.src =largeImageURL;
     
 }
 
-function setLargeImageSRC (url) {
+creatImagesListRootRef.addEventListener('click', onGallaryClick)
+
+/* function setLargeImageSRC (url) {
     largeImage.src = url
-}
+} */
 
 
 /* const refs = {
