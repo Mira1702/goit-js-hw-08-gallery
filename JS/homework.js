@@ -1,4 +1,4 @@
-import galleryItems from '/JS/gallery-items.js'
+import galleryItems from './gallery-items.js'
 
 const creatImagesListRootRef = document.querySelector('.gallery');
 const largeImage = document.querySelector('.lightbox__image');
