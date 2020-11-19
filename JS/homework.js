@@ -1,8 +1,11 @@
-import galleryItems from './gallery-items.js'
+import galleryItems from './gallery-items.js';
 
 const refs = {
     creatImagesListRootRef: document.querySelector('.gallery'),
-    largeImage: document.querySelector('.lightbox__image')
+    lightBox: document.querySelector('.lightbox'),
+    largeImage: document.querySelector('.lightbox__image'),
+    closeBtn: document.querySelector('.lightbox__button'),
+    overlay: document.querySelector('.lightbox__overlay'),
 }
 
 /* const creatImagesListRootRef = document.querySelector('.gallery');
@@ -33,25 +36,86 @@ galleryItems.forEach(element => {
 }    
 )
 
+refs.creatImagesListRootRef.addEventListener('click', onGallaryClick);
+refs.closeBtn.addEventListener('click', closeModal);
+refs.overlay.addEventListener('click', overlayClick);
+
 function onGallaryClick (event) {
     event.preventDefault()
+    if (event.target.nodeName !== 'IMG') {
+        return;
+    }
+        
+    const imgRef = event.target;   
+    const largeImageURL = imgRef.dataset.source;
+    const largeImageALT = imgRef.alt;
+    
+    refs.largeImage.src = largeImageURL;   
+    refs.largeImage.alt = largeImageALT;
+    openModal();
+}
 
-    /* console.log(event.target) */
+function openModal() {
+    window.addEventListener('keydown', onKeyPress);
+    refs.lightBox.classList.add('is-open');
+}
+  
+function closeModal() {
+    refs.lightBox.classList.remove('is-open');
+    window.removeEventListener('keydown', onKeyPress);
+    refs.largeImage.src = '';
+    refs.largeImage.alt = '';
+}
+
+function overlayClick(event) {
+    if (event.currentTarget === event.target) {
+      closeModal();
+    }
+}
+
+function onKeyPress(event) {
+    let activeIndex = Number(event.target.dataset.index);
+  
+    /* switch (event.code) {
+      case 'Escape':
+        closeModal();
+        break;
+  
+      case 'ArrowRight':
+        activeIndex + 1 === galleryItems.length
+          ? (activeIndex = 0)
+          : (activeIndex += 1);
+        refs.lightboxImg.src = galleryItems[activeIndex].original;
+        break;
+  
+      case 'ArrowLeft':
+        activeIndex === 0
+          ? (activeIndex = galleryItems.length - 1)
+          : (activeIndex -= 1);
+        refs.lightboxImg.src = galleryItems[activeIndex].original;
+        break;
+    } */
+}
+
+
+
+
+/* 
+function onLightBoxClick (event) {
+    event.preventDefault()    
 
     if (event.target.nodeName !== 'IMG') {
         return;
     }
-    /* console.log('в картинку') */
     
-    const imgRef = event.target;   
-    const largeImageURL = imgRef.dataset.source;
-    console.log(largeImageURL)
-
     refs.largeImage.src =largeImageURL;
     
 }
 
-creatImagesListRootRef.addEventListener('click', onGallaryClick)
+creatImagesListRootRef.addEventListener('click', onLightBoxClick) */
+
+
+
 
 /* function setLargeImageSRC (url) {
     largeImage.src = url
