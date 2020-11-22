@@ -8,10 +8,6 @@ const refs = {
     overlay: document.querySelector('.lightbox__overlay'),
 }
 
-/* const creatImagesListRootRef = document.querySelector('.gallery');
-const largeImage = document.querySelector('.lightbox__image'); */
-
-
 galleryItems.forEach(element => {
     /* console.log(element); */
     const listImagesRef = document.createElement(`li`); //создает элемент списка li
@@ -32,8 +28,7 @@ galleryItems.forEach(element => {
     imagesRef.setAttribute('alt', element.description);//добавляет атрибут
     imagesRef.setAttribute('data-source', element.original);//добавляет атрибут  
 
-    
-}    
+ }    
 )
 
 refs.creatImagesListRootRef.addEventListener('click', onGallaryClick);
@@ -75,26 +70,7 @@ function overlayClick(event) {
 
 function onKeyPress(event) {
     let activeIndex = Number(event.target.dataset.index);
-  
-    /* switch (event.code) {
-      case 'Escape':
-        closeModal();
-        break;
-  
-      case 'ArrowRight':
-        activeIndex + 1 === galleryItems.length
-          ? (activeIndex = 0)
-          : (activeIndex += 1);
-        refs.lightboxImg.src = galleryItems[activeIndex].original;
-        break;
-  
-      case 'ArrowLeft':
-        activeIndex === 0
-          ? (activeIndex = galleryItems.length - 1)
-          : (activeIndex -= 1);
-        refs.lightboxImg.src = galleryItems[activeIndex].original;
-        break;
-    } */
+     
 }
 
 
